@@ -1,0 +1,9 @@
+C:\Users\Beso\Desktop\GoSMSCore\GoSMSCore\obj\Debug\netstandard2.0\GoSMSCore.csprojAssemblyReference.cache
+C:\Users\Beso\Desktop\GoSMSCore\GoSMSCore\obj\Debug\netstandard2.0\GoSMSCore.AssemblyInfoInputs.cache
+C:\Users\Beso\Desktop\GoSMSCore\GoSMSCore\obj\Debug\netstandard2.0\GoSMSCore.AssemblyInfo.cs
+C:\Users\Beso\Desktop\GoSMSCore\GoSMSCore\obj\Debug\netstandard2.0\GoSMSCore.csproj.CoreCompileInputs.cache
+C:\Users\Beso\Desktop\GoSMSCore\GoSMSCore\bin\Debug\netstandard2.0\GoSMSCore.deps.json
+C:\Users\Beso\Desktop\GoSMSCore\GoSMSCore\bin\Debug\netstandard2.0\GoSMSCore.dll
+C:\Users\Beso\Desktop\GoSMSCore\GoSMSCore\bin\Debug\netstandard2.0\GoSMSCore.pdb
+C:\Users\Beso\Desktop\GoSMSCore\GoSMSCore\obj\Debug\netstandard2.0\GoSMSCore.dll
+C:\Users\Beso\Desktop\GoSMSCore\GoSMSCore\obj\Debug\netstandard2.0\GoSMSCore.pdb
