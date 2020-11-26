@@ -1,3 +1,5 @@
 .vs
 ./GoSMSCore/bin
 ./GoSMSCore/obj
+bin
+obj
