@@ -143,7 +143,7 @@ namespace GoSMSCore
         /// </summary>
         /// <param name="number">recipient number</param>
         /// <returns></returns>
-        public async Task SendOTP(string number)
+        public async Task<string> SendOTP(string number)
         {
             try
             {
@@ -163,6 +163,7 @@ namespace GoSMSCore
 
                 OnSentOTP(new OtpEventArgs(result));
 
+                return result.Hash;
             }
             catch { throw; }
         }
@@ -175,7 +176,7 @@ namespace GoSMSCore
         /// Checks sms balance to the sms service provider
         /// </summary>
         /// <returns></returns>
-        public ICheckBalanceResponse CheckBalance()
+        public int CheckBalance()
         {
             var data = new
             {
@@ -188,7 +189,9 @@ namespace GoSMSCore
                 response = httpClient.PostAsync(Settings.CheckBalanceCall,
                     new StringContent(data.AsJson(), Encoding.UTF8, "Application/Json")).Result;
 
-            return JsonConvert.DeserializeObject<CheckBalanceResponse>(response.Content.ReadAsStringAsync().Result);
+            var result = JsonConvert.DeserializeObject<CheckBalanceResponse>(response.Content.ReadAsStringAsync().Result);
+
+            return result.Success ? result.Balance : 0;
         }
 
         /// <summary>
@@ -196,23 +199,15 @@ namespace GoSMSCore
         /// </summary>
         /// <param name="messageId">sent sms id</param>
         /// <returns></returns>
-        public async Task<IDeliveryResponse> CheckMessageStatus(int messageId)
+        public string CheckMessageStatus(int messageId)
         {
-            var data = new
+            try
             {
-                api_key = Settings.ApiKey,
-                messageId = messageId
-            };
+                var result = GetMessageStatus(messageId);
 
-            HttpResponseMessage response = default;
-
-            using (var httpClient = new HttpClient())
-                response = await httpClient.PostAsync(Settings.CheckStatusCall,
-                    new StringContent(data.AsJson(), Encoding.UTF8, "Application/Json"));
-
-            var result = JsonConvert.DeserializeObject<DeliveryResponse>(await response.Content.ReadAsStringAsync());
-
-            return result;
+                return result.Status;
+            }
+            catch { throw; }
         }
 
         #endregion
@@ -232,6 +227,27 @@ namespace GoSMSCore
         #endregion
 
         #region PRIVATE EVENT HANDLER METHODS
+
+        private IDeliveryResponse GetMessageStatus(int messageId)
+        {
+            try
+            {
+                var data = new
+                {
+                    api_key = Settings.ApiKey,
+                    messageId = messageId
+                };
+
+                HttpResponseMessage response = default;
+
+                using (var httpClient = new HttpClient())
+                    response = httpClient.PostAsync(Settings.CheckStatusCall,
+                        new StringContent(data.AsJson(), Encoding.UTF8, "Application/Json")).Result;
+
+                return JsonConvert.DeserializeObject<DeliveryResponse>(response.Content.ReadAsStringAsync().Result);
+            }
+            catch { throw; }
+        }
 
         /// <summary>
         /// Send message async method 
@@ -292,7 +308,7 @@ namespace GoSMSCore
                  {
                      if (e.Status == MessageStatus.Sent)
                      {
-                         var result = CheckMessageStatus(e.Response.Message_Id).Result;
+                         var result = GetMessageStatus(e.Response.Message_Id);
 
                          OnDelivered(new SmsDeliveryEventArgs(result));
                      }

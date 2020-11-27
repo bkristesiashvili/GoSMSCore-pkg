@@ -149,20 +149,7 @@ namespace GoSMSCore.Responses
 
     #region BALANCE CHECK RESPONSE
 
-    public interface ICheckBalanceResponse
-    {
-        /// <summary>
-        /// expected current Balance
-        /// </summary>
-        int Balance { get; }
-
-        /// <summary>
-        /// Balance check success
-        /// </summary>
-        bool Success { get; }
-    }
-
-    public sealed class CheckBalanceResponse : ICheckBalanceResponse
+    internal sealed class CheckBalanceResponse 
     {
         /// <summary>
         /// expected current Balance
@@ -172,7 +159,7 @@ namespace GoSMSCore.Responses
         /// <summary>
         /// Balance check success
         /// </summary>
-        public bool Success { get; }
+        public bool Success { get; set; }
     }
 
     #endregion

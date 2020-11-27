@@ -58,7 +58,7 @@ namespace GoSMSCore
         /// </summary>
         /// <param name="number">recipient number</param>
         /// <returns></returns>
-        Task SendOTP(string number);
+        Task<string> SendOTP(string number);
 
         #endregion
 
@@ -66,14 +66,14 @@ namespace GoSMSCore
         /// Checks sms balance to the sms service provider
         /// </summary>
         /// <returns></returns>
-        ICheckBalanceResponse CheckBalance();
+        int CheckBalance();
 
         /// <summary>
         /// Checks sms status by message id
         /// </summary>
         /// <param name="messageId">sent sms id</param>
         /// <returns></returns>
-        Task<IDeliveryResponse> CheckMessageStatus(int messageId);
+        string CheckMessageStatus(int messageId);
 
         #endregion
 
