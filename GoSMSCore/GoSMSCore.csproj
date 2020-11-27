@@ -10,6 +10,7 @@
     <AssemblyVersion>3.1.9.0</AssemblyVersion>
     <FileVersion>3.1.9.0</FileVersion>
     <Version>3.1.9</Version>
+    <Description>GoSMS Core library for working with sms API.</Description>
   </PropertyGroup>
 
   <ItemGroup>
