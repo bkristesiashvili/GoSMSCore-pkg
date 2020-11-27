@@ -84,14 +84,16 @@ namespace GoSMSCore
         }
 
         /// <summary>
-        /// Sends sms to many phone numbers
+        /// Sends sms to many phone numbers synchronously
         /// </summary>
-        /// <param name="numbers">phone numbers</param>
-        public void SendToMany(IEnumerable<string> numbers, string message)
+        /// <param name="numbers">phone numbers array</param>
+        /// <param name="message">message tex</param>
+        /// <param name="millisecond">delay in milliseconds between numbers</param>
+        public void SendToMany(IEnumerable<string> numbers, string message, int millisecond = 500)
         {
             try
             {
-                SendToManyAsync(numbers, message)
+                SendToManyAsync(numbers, message, millisecond)
                     .Wait();
             }
             catch { throw; }
@@ -100,17 +102,23 @@ namespace GoSMSCore
         /// <summary>
         /// send sms to many recipient async method
         /// </summary>
-        /// <param name="numbers">recipients numbers</param>
+        /// <param name="numbers">recipient numbers array</param>
         /// <param name="message">message text</param>
+        /// <param name="millisecond">delay in milliseconds between numbers</param>
         /// <param name="token">cancellation token</param>
         /// <returns></returns>
         public async Task SendToManyAsync(IEnumerable<string> numbers,
-            string message, CancellationToken token = default)
+            string message, int millisecond = 500, CancellationToken token = default)
         {
             try
             {
+                millisecond = millisecond < 500 || millisecond > 10000 ? 500 : millisecond;
+
                 foreach (var number in numbers)
+                {
+                    await Task.Delay(millisecond);
                     await SendToOneAsync(number, message, token);
+                }
             }
             catch { throw; }
         }

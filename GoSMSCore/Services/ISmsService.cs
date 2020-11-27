@@ -31,7 +31,7 @@ namespace GoSMSCore
         /// Sends sms to many phone numbers
         /// </summary>
         /// <param name="numbers">phone numbers</param>
-        void SendToMany(IEnumerable<string> numbers, string mesage);
+        void SendToMany(IEnumerable<string> numbers, string mesage, int millisecond = 500);
 
         /// <summary>
         /// send sms to many recipient async method
@@ -41,7 +41,7 @@ namespace GoSMSCore
         /// <param name="token">cancellation token</param>
         /// <returns></returns>
         Task SendToManyAsync(IEnumerable<string> numbers,
-            string message, CancellationToken token = default);
+            string message, int millisecond = 500, CancellationToken token = default);
 
         /// <summary>
         /// Checks sms balance to the sms service provider
