@@ -54,6 +54,8 @@ namespace GoSMSCore
 
         #region PUBLIC METHODS OF THE INTERFACE
 
+        #region SEND TO ONE SYNC & ASYNC
+
         /// <summary>
         /// Sends sms to the one number only
         /// </summary>
@@ -82,6 +84,10 @@ namespace GoSMSCore
             }
             catch { throw; }
         }
+
+        #endregion
+
+        #region SEND TO MANY SYNC & ASYNC
 
         /// <summary>
         /// Sends sms to many phone numbers synchronously
@@ -122,6 +128,12 @@ namespace GoSMSCore
             }
             catch { throw; }
         }
+
+        #endregion
+
+        #region OTP METHODS
+
+        #endregion
 
         /// <summary>
         /// Checks sms balance to the sms service provider
@@ -261,7 +273,7 @@ namespace GoSMSCore
         {
             try
             {
-                if (args.Responses?.MessageId > 0l)
+                if (args.Responses.MessageId > 0)
                     Delivered?.Invoke(this, args);
             }
             catch { throw; }

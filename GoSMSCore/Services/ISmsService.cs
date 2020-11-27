@@ -12,6 +12,8 @@ namespace GoSMSCore
     {
         #region PUBLIC METHODS OF THE INTERFACE
 
+        #region SEND TO ONE SYNC & ASYNC
+
         /// <summary>
         /// Sends sms to the one number only
         /// </summary>
@@ -26,6 +28,10 @@ namespace GoSMSCore
         /// <param name="token">cancellation token struct</param>
         /// <returns></returns>
         Task<ISmsSendResponse> SendToOneAsync(string number, string message, CancellationToken token = default);
+
+        #endregion
+
+        #region SEND TO MANY SYNC & ASYNC
 
         /// <summary>
         /// Sends sms to many phone numbers
@@ -42,6 +48,14 @@ namespace GoSMSCore
         /// <returns></returns>
         Task SendToManyAsync(IEnumerable<string> numbers,
             string message, int millisecond = 500, CancellationToken token = default);
+
+        #endregion
+
+        #region OTP METHODS
+
+
+
+        #endregion
 
         /// <summary>
         /// Checks sms balance to the sms service provider

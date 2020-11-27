@@ -9,17 +9,22 @@ namespace GoSMSCore
         /// <summary>
         /// Message successfuly sent
         /// </summary>
-        Sent, 
-        
+        Sent,
+
         /// <summary>
-        /// message send failed
+        /// sent message in progress to delivery
         /// </summary>
-        Failed,
+        Processing,
 
         /// <summary>
         /// Message delivered status
         /// </summary>
         Delivered,
+
+        /// <summary>
+        /// message send failed
+        /// </summary>
+        Failed,
 
         /// <summary>
         /// when nothing response is known

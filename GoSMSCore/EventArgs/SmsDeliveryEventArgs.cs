@@ -14,11 +14,11 @@ namespace GoSMSCore
         /// <param name="_response">delivery response object</param>
         public SmsDeliveryEventArgs(IDeliveryResponse _response) 
         {
-            Responses = _response;
+            Responses = _response as DeliveryResponse;
 
             if (_response != null)
-                if (_response.Success) Status = _response.Status.Equals("DELIVERED") ? 
-                        MessageStatus.Delivered : MessageStatus.Sent;
+                if (((DeliveryResponse)_response).Success) Status = _response.Status.Equals("DELIVERED") ? 
+                        MessageStatus.Delivered : _response.Status.Equals("IN_PROGRESS") ? MessageStatus.Processing : MessageStatus.Sent;
                 else Status = MessageStatus.Failed;
             else Status = MessageStatus.Undefined;
         }
@@ -30,7 +30,7 @@ namespace GoSMSCore
         /// <summary>
         /// Gets delivery response 
         /// </summary>
-        public IDeliveryResponse Responses { get; }
+        public DeliveryResponse Responses { get; }
 
         /// <summary>
         /// Gets message status
