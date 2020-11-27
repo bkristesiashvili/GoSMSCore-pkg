@@ -41,6 +41,11 @@ namespace GoSMSCore
         /// </summary>
         public  event EventHandler<SmsDeliveryEventArgs> Delivered;
 
+        /// <summary>
+        /// OTP message sent event
+        /// </summary>
+        public event EventHandler<OtpEventArgs> SentOTP;
+
         #endregion
 
         #region PUBLIC PROPERTIES
@@ -133,7 +138,38 @@ namespace GoSMSCore
 
         #region OTP METHODS
 
+        /// <summary>
+        /// Send OTP message to the number
+        /// </summary>
+        /// <param name="number">recipient number</param>
+        /// <returns></returns>
+        public async Task SendOTP(string number)
+        {
+            try
+            {
+                var data = new
+                {
+                    api_key = Settings.ApiKey,
+                    phone = number
+                };
+
+                HttpResponseMessage response = default;
+
+                using (var httpClient = new HttpClient())
+                    response = await httpClient.PostAsync(Settings.SendOtpCall,
+                        new StringContent(data.AsJson(), Encoding.UTF8, "Application/Json"));
+
+                var result = JsonConvert.DeserializeObject<OtpResponse>(await response.Content.ReadAsStringAsync());
+
+                OnSentOTP(new OtpEventArgs(result));
+
+            }
+            catch { throw; }
+        }
+
         #endregion
+
+        #region CHECK BALANCE & CHECK MESSAGE STATUS METHODS
 
         /// <summary>
         /// Checks sms balance to the sms service provider
@@ -190,6 +226,8 @@ namespace GoSMSCore
         {
             GC.SuppressFinalize(this);
         }
+
+        #endregion
 
         #endregion
 
@@ -275,6 +313,19 @@ namespace GoSMSCore
             {
                 if (args.Responses.MessageId > 0)
                     Delivered?.Invoke(this, args);
+            }
+            catch { throw; }
+        }
+
+        /// <summary>
+        /// Invokes sent otp event
+        /// </summary>
+        /// <param name="args"></param>
+        private void OnSentOTP(OtpEventArgs args)
+        {
+            try
+            {
+                SentOTP?.Invoke(this, args);
             }
             catch { throw; }
         }

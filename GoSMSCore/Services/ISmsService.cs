@@ -53,7 +53,12 @@ namespace GoSMSCore
 
         #region OTP METHODS
 
-
+        /// <summary>
+        /// Send OTP message to the number
+        /// </summary>
+        /// <param name="number">recipient number</param>
+        /// <returns></returns>
+        Task SendOTP(string number);
 
         #endregion
 
@@ -84,6 +89,11 @@ namespace GoSMSCore
         /// </summary>
         event EventHandler<SmsDeliveryEventArgs> Delivered;
 
+        /// <summary>
+        /// OTP message sent event
+        /// </summary>
+        event EventHandler<OtpEventArgs> SentOTP;
+ 
         #endregion
     }
 }
