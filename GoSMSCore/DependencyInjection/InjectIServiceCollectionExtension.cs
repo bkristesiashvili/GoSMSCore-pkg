@@ -1,5 +1,4 @@
 ﻿using GoSMSCore.Config;
-using GoSMSCore.Services;
 
 using System;
 using Microsoft.Extensions.DependencyInjection;

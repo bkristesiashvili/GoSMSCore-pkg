@@ -18,7 +18,7 @@ namespace GoSMSCore.Responses
         string Message { get; }
     }
 
-     public interface IGoSmsResponse : IErrorResponse
+     public interface ISmsSendResponse : IErrorResponse
     {
         /// <summary>
         /// get true if message sent successfuly
@@ -28,7 +28,7 @@ namespace GoSMSCore.Responses
         /// <summary>
         /// Get sent message id
         /// </summary>
-        int MessageId { get; }
+        int Message_Id { get; }
 
         /// <summary>
         /// Sender
@@ -71,9 +71,9 @@ namespace GoSMSCore.Responses
          int SmsCharacters { get;  }
     }
 
-    public sealed class GoSmsResponse : IGoSmsResponse
+    public sealed class SmsSendResponse : ISmsSendResponse
     {
-        internal GoSmsResponse() { }
+        internal SmsSendResponse() { }
 
         /// <summary>
         /// Get error code if sms not sent
@@ -93,7 +93,7 @@ namespace GoSMSCore.Responses
         /// <summary>
         /// Get sent message id
         /// </summary>
-        public int MessageId { get; set; }
+        public int Message_Id { get; set; }
 
         /// <summary>
         /// Sender
