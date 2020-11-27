@@ -3,3 +3,4 @@
 ### Periodically we provide package updates & bug fixes.
 ###
 ### Thank you for choosing us
+For more info, visit our page: [GoSMS](https://gosms.ge)
