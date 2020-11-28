@@ -22,11 +22,8 @@ namespace GoSMSCore
         /// Creates GoSMS Service object
         /// </summary>
         /// <param name="settings">service configurations access</param>
-        public GoSmsService(ISmsSettings settings)
-        {
-            Settings = settings;
-        }
-
+        public GoSmsService(ISmsSettings settings) => Settings = settings;
+        
         #endregion
 
         #region EVENTS
