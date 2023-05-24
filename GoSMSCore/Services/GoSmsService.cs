@@ -62,11 +62,11 @@ namespace GoSMSCore
         /// Sends sms to the one number only
         /// </summary>
         /// <param name="number">phone number</param>
-        public ISmsSendResponse SendToOne(string number, string message)
+        public ISmsSendResponse SendToOne(string number, string message, bool urgent = false)
         {
             try
             {
-                return SendToOneAsync(number, message).Result;
+                return SendToOneAsync(number, message,default,  urgent).Result;
             }
             catch { throw; }
         }
@@ -78,11 +78,11 @@ namespace GoSMSCore
         /// <param name="message">message text</param>
         /// <param name="token">cancellation token struct</param>
         /// <returns></returns>
-        public async Task<ISmsSendResponse> SendToOneAsync(string number, string message, CancellationToken token = default)
+        public async Task<ISmsSendResponse> SendToOneAsync(string number, string message, CancellationToken token = default, bool urgent = false)
         {
             try
             {
-                return await Task.FromResult(SendMessageToNumber(number, message, token));
+                return await Task.FromResult(SendMessageToNumber(number, message, token, urgent));
             }
             catch { throw; }
         }
@@ -97,11 +97,11 @@ namespace GoSMSCore
         /// <param name="numbers">phone numbers array</param>
         /// <param name="message">message tex</param>
         /// <param name="millisecond">delay in milliseconds between numbers</param>
-        public void SendToMany(IEnumerable<string> numbers, string message, int millisecond = 500)
+        public void SendToMany(IEnumerable<string> numbers, string message, int millisecond = 500, bool urgent = false)
         {
             try
             {
-                SendToManyAsync(numbers, message, millisecond)
+                SendToManyAsync(numbers, message, millisecond, default,  urgent)
                     .Wait();
             }
             catch { throw; }
@@ -116,7 +116,7 @@ namespace GoSMSCore
         /// <param name="token">cancellation token</param>
         /// <returns></returns>
         public async Task SendToManyAsync(IEnumerable<string> numbers,
-            string message, int millisecond = 500, CancellationToken token = default)
+            string message, int millisecond = 500, CancellationToken token = default, bool urgent = false)
         {
             try
             {
@@ -253,7 +253,7 @@ namespace GoSMSCore
         /// <param name="message"></param>
         /// <param name="token"></param>
         /// <returns></returns>
-        private ISmsSendResponse SendMessageToNumber(string number, string message, CancellationToken token = default)
+        private ISmsSendResponse SendMessageToNumber(string number, string message, CancellationToken token = default, bool urgent = false)
         {
             try
             {
@@ -272,7 +272,8 @@ namespace GoSMSCore
                     api_key = Settings.ApiKey,
                     from = Settings.Sender,
                     to = number,
-                    text = message
+                    text = message,
+                    urgent = urgent
                 };
 
                 HttpResponseMessage response = default;

@@ -18,7 +18,7 @@ namespace GoSMSCore
         /// Sends sms to the one number only
         /// </summary>
         /// <param name="number">phone number</param>
-        ISmsSendResponse SendToOne(string number, string message);
+        ISmsSendResponse SendToOne(string number, string message, bool urgent = false);
 
         /// <summary>
         /// Send sms to one number async method
@@ -27,7 +27,7 @@ namespace GoSMSCore
         /// <param name="message">message text</param>
         /// <param name="token">cancellation token struct</param>
         /// <returns></returns>
-        Task<ISmsSendResponse> SendToOneAsync(string number, string message, CancellationToken token = default);
+        Task<ISmsSendResponse> SendToOneAsync(string number, string message, CancellationToken token = default, bool urgent = false);
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace GoSMSCore
         /// Sends sms to many phone numbers
         /// </summary>
         /// <param name="numbers">phone numbers</param>
-        void SendToMany(IEnumerable<string> numbers, string mesage, int millisecond = 500);
+        void SendToMany(IEnumerable<string> numbers, string mesage, int millisecond = 500, bool urgent = false);
 
         /// <summary>
         /// send sms to many recipient async method
@@ -47,7 +47,7 @@ namespace GoSMSCore
         /// <param name="token">cancellation token</param>
         /// <returns></returns>
         Task SendToManyAsync(IEnumerable<string> numbers,
-            string message, int millisecond = 500, CancellationToken token = default);
+            string message, int millisecond = 500, CancellationToken token = default, bool urgent = false);
 
         #endregion
 

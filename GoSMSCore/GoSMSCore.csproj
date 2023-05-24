@@ -2,24 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Authors>Besik Kristesiashvili</Authors>
+    <Authors>GOSMS.GE</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>logo.png</PackageIcon>
     <PackageTags>SMS Send Services</PackageTags>
     <Company>GoSMS</Company>
-    <AssemblyVersion>3.1.9.0</AssemblyVersion>
-    <FileVersion>3.1.9.0</FileVersion>
-    <Version>3.1.9</Version>
+    <AssemblyVersion>5.1.1.0</AssemblyVersion>
+    <FileVersion>5.1.1.0</FileVersion>
+    <Version>5.1.1</Version>
     <Description>GoSMS Core library for working with sms API.</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.9" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0-preview.4.23259.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\logo.png">
+    <None Include="logo.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
